@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 15 19:12:22 2019
+
+@author: luis_
+"""
+#EDGES
+#laplacian
+#thresh=cv.Laplacian(img, cv.CV_64F, ksize=1)
+
+#sobelx = cv.Sobel(img, cv.CV_64F, 1, 0)
+#sobely = cv.Sobel(img, cv.CV_64F, 0, 1)
+#cv.imshow("Sobelx", sobelx)
+#cv.imshow("Sobely", sobely)
+
+
+#Threshold
+#ret, thresh = cv.threshold(gray,0,255,cv.THRESH_BINARY_INV+cv.THRESH_OTSU)
+
+
+# ni zorra
+cnts = cv.findContours(thresh.copy(), cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
+cv.drawContours(thresh, cnts, -1, (255, 255, 255), thickness=cv.FILLED)
+
+
+erode = cv.erode(thresh,kernel,iterations = 1)
+dilate = cv.dilate(thresh,kernel,iterations = 1)
+opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)

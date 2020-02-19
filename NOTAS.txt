@@ -1,0 +1,4 @@
+Notas:
+    TIPO 3:
+        
+    Conseguir la tangente del borde y tomar tras el borde
