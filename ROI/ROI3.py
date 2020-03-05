@@ -28,34 +28,69 @@ def inclinacionRecta(p1, p2):
     
     m=(p2[1]-p1[1])/(p2[0]-p1[0])
     
+    deg =math.degrees(math.atan(m))
     
-    return (-1)*math.degrees(math.atan(m))
+    if deg<0:
+        return 90+deg
+    
+    return math.degrees(math.atan(m))-90
+
+
+
+
 
 """
-Busca un pixel no 0 desde la izquieda de la imagen y devuelve el punto
-A es la posicion del pixel inicial
-d distancia en pixeles
-"""
+Busca el primer pixel negro desde la izquieda de la imagen y devuelve el punto
+A es la posicion vertical inicial 
+d distancia vertical en pixeles desde la posicion inicial
 
+(la que se mueve es la segunda coordenada)
+"""
 def findPixelFromLeft(img, A, d):
     
     aux=A-d
-    pixel=img[0][A]
     y=0
+    
+    
     print(aux)
-    print(pixel)
-    
-    
-    
-    while pixel==0 and aux[1]<=0 and aux[0]>=img.shape[0]:
+    while aux>=0 and aux<=img.shape[0] and y<img.shape[1]-1:
+        
         y=y+1
-        if img[y][aux[1]]!=0:
-            return [y, aux[1]]
-    return False    
+        if img[aux][y]!=0:
+            return [aux, y]
+        
+    return [aux, y]   
     
+
+
+
+
+
+def adaptarDistancia(p1, p2, d):
+    
+    deg=abs(inclinacionRecta(p1, p2))
+    
+    if deg<45:
+        return d*(-1)*(90-deg)/90
+    return d*(deg/90)
+
     
 #TODO: crear una imagen del tamaño de la original, tomar varios puntos del borde, crea
 #   un area ROI
-    def roi3(img):
-        return False
+""" 
+d distancia base para calcular los puntos
+"""
+
+
+def roi3(img,d):
+    firstPixel=findPixelFromLeft(img, img.shape[0]-1,0)
+    auxPixel1=findPixelFromLeft(img, img.shape[0]-1,d)
+    pixelList=[firstPixel,auxPixel1]
+        
+         
+        
+    while pixelList[pixelList.count][0]!=img.shape[1]-1:
+            auxPixel1
+        
+    return img
     

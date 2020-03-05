@@ -18,8 +18,8 @@ def fillHoles(img):
     
     return im_out
 
-#TODO
+
 def deleteFreaserInfo(img):
     
     
-    return img
+    return img[0:1024, 0:1280]
