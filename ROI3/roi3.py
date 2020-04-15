@@ -2,6 +2,7 @@
 
 import os,sys,inspect, cv2
 import numpy as np
+import preprocessing
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir) 
@@ -13,16 +14,19 @@ from blur import blurMethods
 def roiM1(img):
     blur = blurMethods.gaussian(img, standardDeviation=21)
     otsu = thresholdMethods.otsuThreshold(blur, 0, 255, cv2.THRESH_BINARY)
-    imagem = cv2.bitwise_not(otsu)
+
+   
+    imagem=preprocessing.fillHoles(otsu)
+    imagem = cv2.bitwise_not(imagem)
     dilation = morphologicalMethods.dilatacion(imagem, iters=40)
     
     
     
-    dest_xor = cv2.bitwise_xor(otsu, dilation, mask = None) 
-    roi=cv2.bitwise_not(dest_xor)
+    dest_xor = cv2.bitwise_xor(imagem, dilation, mask = None) 
+    #roi=cv2.bitwise_not(dest_xor)
     
    # dest_and = cv2.bitwise_and(roi, img, mask = None) 
-    return roi
+    return dest_xor
 
 
 

@@ -6,14 +6,14 @@ import morphologicalMethods
 
 
 
-img =cv2.imread('coins.jpg')
+img =cv2.imread('1mm2.tif')
 img=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, img=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
-#img=morphologicalMethods.erosion(img)
+img=morphologicalMethods.erosion(img,iters=9)
 #img=morphologicalMethods.dilatacion(img)
 #img=morphologicalMethods.cierre(img)
 #img=morphologicalMethods.apertura(img)
-img=morphologicalMethods.gradient(img)
+#img=morphologicalMethods.gradient(img)
 
 
 
